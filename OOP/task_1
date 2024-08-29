@@ -1,1 +1,95 @@
+#Задание №1
+class Rectangle:
+    def __init__(self, width, height):
+        self.width=width
+        self.height=height
+
+    def  square_rectangle(self):
+        square = self.width*self.height
+        return square
+    def perimeter_rectangl(self):
+        perimeter=(self.width)*2 + (self.height)*2
+        return perimeter
+
+
+rec1=Rectangle(10,11)
+print(f'1.Плащадь первого прямоуголника равна {rec1.square_rectangle()} кв.см.')
+print(f'1.Периметр первого прямоугольника равен {rec1.perimeter_rectangl()} кв.см.')
+
+rec2=Rectangle(8,12)
+print(f'2.Плащадь второго прямоуголника равна {rec2.square_rectangle()} кв.см.')
+print(f'2.Периметр второго прямоугольника равен {rec2.perimeter_rectangl()} кв.см.')
+
+rec3=Rectangle(18,22)
+print(f'3.Плащадь третьего прямоуголника равна {rec3.square_rectangle()} кв.см.')
+print(f'3.Периметр третьего прямоугольника равен {rec3.perimeter_rectangl()} кв.см.')
+
+
+rec4=Rectangle(13,6)
+print(f'4.Плащадь четвертого прямоуголника равна {rec4.square_rectangle()} кв.см.')
+print(f'4.Плащадь четвертого прямоуголника равна {rec4.perimeter_rectangl()} кв.см.')
+
+#Задание № 2
+class Person:
+    def __init__(self, name):
+        self.name=name
+
+    def introduce(self):
+        print(f'Hello, my name is {self.name}!!!')
+
+class  Student(Person):
+    def  __init__ (self, name): 
+        super().__init__(name)
+        
+    def  introduce(self):
+        print(f'Привет! Меня зовут {self.name}. Я студент.')   
+
+class   Teacher(Person):
+    def __init__(self, name,t):
+        super().__init__(name) 
+        self.teacher=t     
+        
+    def  introduce(self):  
+        print(f'Привет! Меня зовут {self.name}. Я {self.teacher}.')  
+
+
+person1=Student('Ольга')    
+print(person1.introduce()) 
+personT=Teacher("Татьяна",'учитель')   
+print(personT.introduce())
+
+#Задание № 3
+class Circle:
+    count=0
+    
+    def __init__(self,r):
+        Circle.radius=r
+        Circle.count+=1
+        print(f'Круг радиусом {Circle.radius}см')
+        
+    @classmethod 
+    def from_diameterr(cls, d):
+        
+        radius=(int(d/2))
+        return cls (radius)
+       
+    @classmethod
+    def total_object(cls):
+        return cls.count
+    
+    @staticmethod 
+    def cx():
+        if Circle.radius>0:
+            return True
+        else:
+            return False                
+
+circl1=Circle(12)
+print(circl1.radius)
+circl2=Circle.from_diameterr(5)
+print(circl2.radius)
+circl3=Circle(-28)
+print(Circle.count)
+print(f'Общее количество окружностей: {Circle.total_object()}')
+print(f'Длина всех окружностей принимает значение: {Circle.cx()}')
 
