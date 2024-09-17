@@ -1,1 +1,34 @@
+Задание № 1
+a=[1,2,3]
+b=[10,20,30]
+list_ab=[(i,x ) for i in a for x in b]
+print(list_ab)
+
+Задание №2
+lst=['радар', 'мадам', 'утро', 'казак', 'топот', 'стул']   
+   
+
+def cx(s):
+    if s==s[::-1]:
+        return True
+    else:
+        return False
+
+lst_1={key: cx(key)  for key in lst}
+lst_2={key:True if key==key[::-1]else False for key in lst}
+print(lst_1)
+print(lst_2)
+
+Задание №3
+list_1=['apple', 'banana', 'orange', 'avocado', 'lime', 'artichoke']  
+
+list_2=[x for x in list_1 if x[0]==('a') or x[0]=='o']
+
+print(list_2)
+
+Задание № 4
+a=['hello', 'world', 'python', 'programming']
+unique={i for x in a for i in x}
+print(unique)
+
 
