@@ -1,1 +1,106 @@
+lass FailedClientID(Exception):
+    def __init__(self, _client_id):
+        self._client_id = _client_id
+
+    def __str__(self):
+        return f'Недопустимое значение: {self._client_id}'
+
+
+def failed_client_id(id):
+    raise ValueError(f'Нет индекса {id}')
+
+
+class Person:
+
+    def __init__(self, name, phone_number, address):
+        self.__name = name
+        self.__phone_number = phone_number
+        self.__address = address
+
+    @property
+    def phone(self):
+        return self.__phone_number
+
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def address(self):
+        return self.__address
+
+    @phone.setter
+    def phone(self, new_phone):
+        self.__phone_number = new_phone
+        print(f'Вы изменили номер телефона, новый номер телефона {self.__phone_number}')
+
+   
+class Customer(Person):
+    _client_id = 0
+
+    def __init__(self, name, phone_number, address):
+        super().__init__(name, phone_number, address)
+        self.id = Customer._client_id + 1
+        Customer._client_id += 1
+        
+    def __str__(self):
+        return f'{self.name} - номер ТЛФ: {self.phone}, адрес: {self.address}, id:{self.id}'
+
+
+class ShoppingCard:
+    def __init__(self):
+        self.product_list = []
+        print(f'Покупатель взял корзину')
+
+    def add_list_product(self, name_t, count_t, price_t):
+        self.product_list.append((name_t, count_t, price_t))
+
+        print(f'Покупатель положил в корзину {name_t}  в количестве {count_t} кг по цене {price_t} руб.')
+
+    def calculate_total(self):
+        if len(self.product_list) > 0:
+            return sum([el[1] * el[2] for el in self.product_list])
+
+    def __repr__(self):
+        return f'{self.product_list}'
+
+
+class Shop:
+    def __init__(self):
+        self.customers = {}
+        print('Магазин открыт для покупателей')
+
+    def add_customer(self, persona, card):
+        p = persona.id
+        s = card
+        self.customers[p] = s
+        print(self.customers)
+        print(f'В магазине покупатель {p} с  товарами: {s}')
+
+    def get_order_shopping(self, persona):
+        id = persona.id
+        res = self.customers.get(id)
+        if res:
+            return res.calculate_total()
+        failed_client_id(id)
+        
+    def __repr__(self):
+        return f'{self.customers}'
+
+persona1 = Customer('Tatyana', '+7 921 182-19-87', 'Москва')
+print(persona1)
+
+# persona1.phone = '123-45-76'
+persona2 = Customer('Olga', '+7 906 241-01-34', 'Санкт-Петербург')
+print(persona2)
+card = ShoppingCard()
+card.add_list_product('Картофель', 5, 45)
+card.add_list_product('Морковь', 1, 65)
+print(card)
+print(card.calculate_total())
+magasin = Shop()
+magasin.add_customer(persona1, card)
+print(magasin)
+print(magasin.get_order_shopping(persona1))
+
 
